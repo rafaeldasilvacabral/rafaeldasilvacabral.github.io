@@ -23,6 +23,42 @@
 		th {
 		    background-color: #f2f2f2;
 		}
+		/* Estilos do menu */
+		#nav {
+		    position: relative;
+		}
+		
+		.menu-toggle {
+		    display: none;
+		    font-size: 24px;
+		    cursor: pointer;
+		    padding: 10px;
+		}
+		
+		@media screen and (max-width: 768px) {
+		    .menu-toggle {
+		        display: block;
+		    }
+		
+		    #nav ul {
+		        display: none;
+		        flex-direction: column;
+		        background: #333;
+		        position: absolute;
+		        top: 50px;
+		        right: 0;
+		        width: 100%;
+		        text-align: center;
+		    }
+		
+		    #nav ul li {
+		        padding: 10px;
+		    }
+		
+		    #nav ul.show {
+		        display: flex;
+		    }
+		}		    
 	    </style>		
 	</head>
 	<body class="is-preload">
@@ -244,6 +280,11 @@
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script>
+			    function toggleMenu() {
+			        document.querySelector("#nav ul").classList.toggle("show");
+			    }
+			</script>
 			<link href="./fontawesome/css/fontawesome.min.css" rel="stylesheet">
 			<link href="./fontawesome/css/brands.min.css" rel="stylesheet">
 			<link href="./fontawesome/css/all.min.css" rel="stylesheet">

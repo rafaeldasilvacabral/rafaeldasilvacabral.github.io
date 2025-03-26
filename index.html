@@ -23,59 +23,109 @@
 		th {
 		    background-color: #f2f2f2;
 		}
-		/* Estilos do menu */
-		#nav {
-		    position: relative;
+		    
+/* Estilização do menu lateral */
+#menuToggle {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 1000;
+}
+
+#menuToggle input {
+    display: none;
+}
+
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 1001;
+}
+
+.menu-btn span {
+    display: block;
+    width: 100%;
+    height: 5px;
+    background: black;
+    transition: 0.3s;
+}
+		
+		/* Menu fechado */
+		#menu {
+		    position: fixed;
+		    left: -250px;
+		    top: 0;
+		    width: 250px;
+		    height: 100%;
+		    background: rgba(0, 0, 0, 0.9);
+		    transition: 0.3s;
+		    padding-top: 50px;
 		}
 		
-		.menu-toggle {
-		    display: none;
-		    font-size: 24px;
-		    cursor: pointer;
-		    padding: 10px;
+		#menu ul {
+		    list-style: none;
+		    padding: 0;
+		    margin: 0;
 		}
 		
-		@media screen and (max-width: 768px) {
-		    .menu-toggle {
-		        display: block;
-		    }
+		#menu ul li {
+		    padding: 15px;
+		    text-align: center;
+		}
 		
-		    #nav ul {
-		        display: none;
-		        flex-direction: column;
-		        background: #333;
-		        position: absolute;
-		        top: 50px;
-		        right: 0;
-		        width: 100%;
-		        text-align: center;
-		    }
+		#menu ul li a {
+		    text-decoration: none;
+		    color: white;
+		    font-size: 20px;
+		}
 		
-		    #nav ul li {
-		        padding: 10px;
-		    }
+		/* Animação para abrir o menu */
+		#menuCheckbox:checked ~ #menu {
+		    left: 0;
+		}
 		
-		    #nav ul.show {
-		        display: flex;
-		    }
-		}		    
+		/* Animação para os ícones do menu */
+		#menuCheckbox:checked ~ .menu-btn span:nth-child(1) {
+		    transform: rotate(45deg) translate(5px, 5px);
+		}
+		
+		#menuCheckbox:checked ~ .menu-btn span:nth-child(2) {
+		    opacity: 0;
+		}
+		
+		#menuCheckbox:checked ~ .menu-btn span:nth-child(3) {
+		    transform: rotate(-45deg) translate(5px, -5px);
+		}
 	    </style>		
 	</head>
 	<body class="is-preload">
 
 		<!-- Nav -->
-			<nav id="nav">
-			    <div class="menu-toggle" onclick="toggleMenu()">
-			        <span class="fa-solid fa-bars"></span>
-			    </div>
-			    <ul class="container">
-			        <li><a href="#top">Welcome</a></li>
-			        <li><a href="#work">Work</a></li>
-			        <li><a href="#portfolio">Portfolio</a></li>
-			        <li><a href="resume.pdf">Resume</a></li>
-			        <li><a href="#contact">Contact</a></li>
-			    </ul>
-			</nav>
+		<!-- Menu Hamburger -->
+		<div id="menuToggle">
+		    <input type="checkbox" id="menuCheckbox">
+		    <label for="menuCheckbox" class="menu-btn">
+		        <span></span>
+		        <span></span>
+		        <span></span>
+		    </label>
+		    <nav id="menu">
+		        <ul>
+		            <li><a href="#top">Welcome</a></li>
+		            <li><a href="#work">Work</a></li>
+		            <li><a href="#portfolio">Portfolio</a></li>
+		            <li><a href="resume.pdf">Resume</a></li>
+		            <li><a href="#contact">Contact</a></li>
+		        </ul>
+		    </nav>
+		</div>
 
 		<!-- Home -->
 			<article id="top" class="wrapper style1">

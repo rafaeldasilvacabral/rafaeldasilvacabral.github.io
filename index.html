@@ -10,19 +10,33 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-	    <style>
-		table {
-		    width: 100%;
-		    border-collapse: collapse;
-		}
-		th, td {
-		    border: 1px solid black;
-		    padding: 8px;
-		    text-align: left;
-		}
-		th {
-		    background-color: #f2f2f2;
-		}
+<style>
+	
+.button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+	
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
 		    
 /* Estilização do menu lateral */
 #menuToggle {
@@ -56,54 +70,55 @@
     background: black;
     transition: 0.3s;
 }
+
+/* Menu fechado */
+#menu {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    transition: 0.3s;
+    padding-top: 50px;
+}
+
+#menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu ul li {
+    padding: 15px;
+    text-align: center;
+}
+
+#menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+/* Animação para abrir o menu */
+#menuCheckbox:checked ~ #menu {
+    left: 0;
+}
+
+/* Animação para os ícones do menu */
+#menuCheckbox:checked ~ .menu-btn span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+#menuCheckbox:checked ~ .menu-btn span:nth-child(2) {
+    opacity: 0;
+}
+
+#menuCheckbox:checked ~ .menu-btn span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+</style>		
 		
-		/* Menu fechado */
-		#menu {
-		    position: fixed;
-		    left: -250px;
-		    top: 0;
-		    width: 250px;
-		    height: 100%;
-		    background: rgba(0, 0, 0, 0.9);
-		    transition: 0.3s;
-		    padding-top: 50px;
-		}
-		
-		#menu ul {
-		    list-style: none;
-		    padding: 0;
-		    margin: 0;
-		}
-		
-		#menu ul li {
-		    padding: 15px;
-		    text-align: center;
-		}
-		
-		#menu ul li a {
-		    text-decoration: none;
-		    color: white;
-		    font-size: 20px;
-		}
-		
-		/* Animação para abrir o menu */
-		#menuCheckbox:checked ~ #menu {
-		    left: 0;
-		}
-		
-		/* Animação para os ícones do menu */
-		#menuCheckbox:checked ~ .menu-btn span:nth-child(1) {
-		    transform: rotate(45deg) translate(5px, 5px);
-		}
-		
-		#menuCheckbox:checked ~ .menu-btn span:nth-child(2) {
-		    opacity: 0;
-		}
-		
-		#menuCheckbox:checked ~ .menu-btn span:nth-child(3) {
-		    transform: rotate(-45deg) translate(5px, -5px);
-		}
-	    </style>		
 	</head>
 	<body class="is-preload">
 
@@ -139,8 +154,7 @@
 								<h1>Hi. I'm <strong>Rafael da Silva Cabral</strong>.</h1>
 							</header>
 							<p>+10Y Data Analyst | System Analyst | Data Science | Data Visualization | Data Integration | Data Reporting | Automation | Power BI | Excel | Business Intelligence | Python | SQL</p>
-							<!--<a href="#work" class="button large scrolly">What I do</a>
-							<a href="#work" class="button large scrolly">teste</a>-->
+							<a href="#work" class="button">What I do</a>
 						</div>
 					</div>
 				</div>

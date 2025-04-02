@@ -7,20 +7,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_STRING);
 
     if ($nome && $email && $subject && $mensagem) {
-        $to = "rscabral.canada@gmail.com";
-        $headers = "From: $email\r\n" .
-                   "Reply-To: $email\r\n" .
-                   "Content-Type: text/plain; charset=UTF-8";
-        $body = "Nome: $nome\nEmail: $email\nAssunto: $subject\n\nMensagem:\n$mensagem";
+        // $to = "seuemail@dominio.com";
+        // $headers = "From: $email\r\n" .
+        //            "Reply-To: $email\r\n" .
+        //            "Content-Type: text/plain; charset=UTF-8";
+        // $body = "Nome: $nome\nEmail: $email\nAssunto: $subject\n\nMensagem:\n$mensagem";
 
-        if (mail($to, $subject, $body, $headers)) {
-            echo "E-mail enviado com sucesso!";
-        } else {
-            echo "Falha no envio do e-mail.";
-        }
+        // if (mail($to, $subject, $body, $headers)) {
+        //     echo "E-mail enviado com sucesso!";
+        // } else {
+        //     echo "Falha no envio do e-mail.";
+        // }
+
+        echo "<pre>";
+        print_r([
+            'nome' => $nome,
+            'email' => $email,
+            'subject' => $subject,
+            'mensagem' => $mensagem
+        ]);
+        echo "</pre>";
     } else {
         echo "Preencha todos os campos corretamente.";
     }
 }
 ?>
+
 

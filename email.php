@@ -1,4 +1,4 @@
-<!-- envio_email.php -->
+<!-- email.php -->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
@@ -19,16 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //     echo "Falha no envio do e-mail.";
         // }
 
-        echo "<pre>";
-        print_r([
-            'nome' => $nome,
-            'email' => $email,
-            'subject' => $subject,
-            'mensagem' => $mensagem
-        ]);
-        echo "</pre>";
+        echo "<h3>Dados Recebidos:</h3>";
+        echo "<p><strong>Nome:</strong> $nome</p>";
+        echo "<p><strong>Email:</strong> $email</p>";
+        echo "<p><strong>Assunto:</strong> $subject</p>";
+        echo "<p><strong>Mensagem:</strong> $mensagem</p>";
     } else {
-        echo "Preencha todos os campos corretamente.";
+        echo "<p>Preencha todos os campos corretamente.</p>";
     }
 }
 ?>

@@ -1,31 +1,39 @@
 <!-- email.php -->
 
 <?php
-require 'path/to/PHPMailer/src/PHPMailer.php';
-require 'path/to/PHPMailer/src/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-$mail = new PHPMailer\PHPMailer\PHPMailer();
-$mail->isSMTP();
-$mail->SMTPDebug = 2;
-$mail->SMTPAuth = true;
-$mail->SMTPSecure = 'ssl'; // ou 'tls'
-$mail->Host = 'smtp.seuservidor.com';
-$mail->Port = 465; // ou 587
-$mail->Username = 'rscabral.canada@gmail.com';
-$mail->Password = 'lmr@4210CC';
-$mail->setFrom('rscabral.canada@gmail.com', 'Rafael Cabral');
-$mail->addAddress('rafael.cabral@hotmail.com.br', 'Rafael');
-$mail->Subject = 'Teste do email';
-$mail->Body = 'Ola tudo bem';
-$mail->AltBody = 'Simples assim';
+require 'vendor/autoload.php';
 
-if(!$mail->send()) {
-    echo 'Erro ao enviar email: ' . $mail->ErrorInfo;
-} else {
-    echo 'Email enviado com sucesso!';
+$mail = new PHPMailer(true);
+
+try {
+    // Configuração do servidor SMTP
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com'; 
+    $mail->SMTPAuth   = true;
+    $mail->Username   = getenv('MAIL_USERNAME'); 
+    $mail->Password   = getenv('MAIL_PASSWORD'); 
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
+
+    // Endereços
+    $mail->setFrom(getenv('MAIL_USERNAME'), 'Seu Nome');
+    $mail->addAddress('rafael.cabral@hotmail.com.br', 'Destinatário');
+
+    // Conteúdo
+    $mail->isHTML(true);
+    $mail->Subject = 'Teste de envio pelo GitHub Actions';
+    $mail->Body    = 'Este e-mail foi enviado automaticamente com <strong>PHPMailer</strong>.';
+
+    $mail->send();
+    echo "E-mail enviado com sucesso!";
+} catch (Exception $e) {
+    echo "Erro ao enviar o e-mail: {$mail->ErrorInfo}";
 }
+    
 ?>
-
 
 
 

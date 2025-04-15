@@ -1,33 +1,31 @@
 <!-- email.php -->
+
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-    $subject = filter_input(INPUT_POST, 'subject', FILTER_SANITIZE_STRING);
-    $mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_STRING);
+require 'path/to/PHPMailer/src/PHPMailer.php';
+require 'path/to/PHPMailer/src/SMTP.php';
 
-    if ($nome && $email && $subject && $mensagem) {
-        // $to = "seuemail@dominio.com";
-        // $headers = "From: $email\r\n" .
-        //            "Reply-To: $email\r\n" .
-        //            "Content-Type: text/plain; charset=UTF-8";
-        // $body = "Nome: $nome\nEmail: $email\nAssunto: $subject\n\nMensagem:\n$mensagem";
+$mail = new PHPMailer\PHPMailer\PHPMailer();
+$mail->isSMTP();
+$mail->SMTPDebug = 2;
+$mail->SMTPAuth = true;
+$mail->SMTPSecure = 'ssl'; // ou 'tls'
+$mail->Host = 'smtp.seuservidor.com';
+$mail->Port = 465; // ou 587
+$mail->Username = 'rscabral.canada@gmail.com';
+$mail->Password = 'lmr@4210CC';
+$mail->setFrom('rscabral.canada@gmail.com', 'Rafael Cabral');
+$mail->addAddress('rafael.cabral@hotmail.com.br', 'Rafael');
+$mail->Subject = 'Teste do email';
+$mail->Body = 'Ola tudo bem';
+$mail->AltBody = 'Simples assim';
 
-        // if (mail($to, $subject, $body, $headers)) {
-        //     echo "E-mail enviado com sucesso!";
-        // } else {
-        //     echo "Falha no envio do e-mail.";
-        // }
-
-        echo "<h3>Dados Recebidos:</h3>";
-        echo "<p><strong>Nome:</strong> $nome</p>";
-        echo "<p><strong>Email:</strong> $email</p>";
-        echo "<p><strong>Assunto:</strong> $subject</p>";
-        echo "<p><strong>Mensagem:</strong> $mensagem</p>";
-    } else {
-        echo "<p>Preencha todos os campos corretamente.</p>";
-    }
+if(!$mail->send()) {
+    echo 'Erro ao enviar email: ' . $mail->ErrorInfo;
+} else {
+    echo 'Email enviado com sucesso!';
 }
 ?>
+
+
 
 

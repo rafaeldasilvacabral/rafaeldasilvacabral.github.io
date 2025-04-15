@@ -1,25 +1,26 @@
-name: Enviar Email
+name: Enviar e-mail com PHPMailer
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # Isso permite que você execute manualmente
 
 jobs:
-  enviar_email:
+  enviar-email:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do código
-      uses: actions/checkout@v2
+      - name: Clonar repositório
+        uses: actions/checkout@v3
 
-    - name: Configurar PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
+      - name: Instalar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
 
-    - name: Instalar dependências
-      run: composer install
+      - name: Instalar dependências
+        run: composer install
 
-    - name: Enviar email
-      run: php path/to/enviar.php
+      - name: Executar o script de envio
+        env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        run: php email.php

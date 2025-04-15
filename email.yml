@@ -1,0 +1,25 @@
+name: Enviar Email
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  enviar_email:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v2
+
+    - name: Configurar PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+
+    - name: Instalar dependências
+      run: composer install
+
+    - name: Enviar email
+      run: php path/to/enviar.php
